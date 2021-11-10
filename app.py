@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template, send_from_directory
 import os
 from PIL import Image
-import cv2cd
+import cv2
 from werkzeug.utils import redirect
 import process as process
 
