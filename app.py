@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template, send_from_directory
 import os
 from PIL import Image
-import cv2
+import cv2cd
 from werkzeug.utils import redirect
 import process as process
 
@@ -46,6 +46,19 @@ def proses1():
         mode = 'niblack'
     elif 'sauvola' in request.form.get('select_thresholding'):
         mode = 'sauvola'
+    elif 'sim' in request.form.get('select_thresholding'):
+        mode = 'sim'
+    elif 'mean' in request.form.get('select_thresholding'):
+        mode = 'mean'
+    elif 'gaus' in request.form.get('select_thresholding'):
+        mode = 'gaus'
+    elif 'wid' in request.form.get('select_thresholding'):
+        mode = 'wid'
+    elif 'mid' in request.form.get('select_thresholding'):
+        mode = 'mid'
+    elif 'tight' in request.form.get('select_thresholding'):
+        mode = 'tight'
+    
         
     #process
     if mode == 'otsu':
@@ -58,6 +71,24 @@ def proses1():
         cv2.imwrite("/".join([target, 'result.jpg']),img_res)
     elif mode == 'sauvola':
         img_res = process.sauvola_thresh(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'sim':
+        img_res = process.sim_thresh(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'mean':
+        img_res = process.mean_thresh(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'gaus':
+        img_res = process.gaus_thresh(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'wid':
+        img_res = process.wid_map(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'mid':
+        img_res = process.mid_map(img)
+        cv2.imwrite("/".join([target, 'result.jpg']),img_res)
+    elif mode == 'tight':
+        img_res = process.tight_map(img)
         cv2.imwrite("/".join([target, 'result.jpg']),img_res)
 
     # forward to processing page
